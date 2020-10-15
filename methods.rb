@@ -105,7 +105,22 @@ module Enumerable
     new_arr
   end
 
+  def my_inject(arg = nil, sym = nil)
+    if (arg.is_a?(Symbol) || arg.is_a?(String)) && (!arg.nil? && sym.nil?)
+      sym = arg
+      arg = nil
+    end
 
+    if !block_given? && !sym.nil?
+      my_each { |item| arg = arg.nil? ? item : arg.send(sym, item) }
+    else
+      my_each { |item| arg = arg.nil? ? item : yield(arg, item) }
+    end
+    arg
+  end
 end
 
+def multiply_els(list)
+  list.my_inject(:*)
+end
 # rubocop:enable Style/CaseEquality
