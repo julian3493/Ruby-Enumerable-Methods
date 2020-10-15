@@ -16,10 +16,9 @@ module Enumerable
     return to_enum(:my_each_with_index) unless block_given?
 
     list = to_a if self.class == Range || Hash
-    i = 0
-    while i < list.length
+    
+    for i in 0..list.length
       yield(list[i], i)
-      i += 1
     end
     self
   end
@@ -32,6 +31,22 @@ module Enumerable
     sel_arr
   end
 
+  def my_all?(*arg)
+    if block_given?
+      my_each { |item| return false if yield(item) == false}
+      true
+    elsif arg.nil?
+      my_each { |element| return false if element.nil? }
+    elsif !arg.nil? and arg.is_a?(Class)
+      my_each { |element| return false unless [element.class].include?(arg) }
+    elsif arg.class == Regexp
+      my_each { |element| return false unless arg.match(element) }
+    else my_each { |element| return false if element != arg }
+    end
+    true
+  end
+
+  
 end
 
 # rubocop:enable Style/CaseEquality
