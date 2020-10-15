@@ -59,6 +59,26 @@ module Enumerable
     end
     false
   end
+
+  def my_none?(*arg)
+    if block_given?
+      my_each { |element| return false if yield(element) }
+      true
+    elsif arg.is_a?(Class)
+      my_each { |element| return false if element.class == arg }
+      true
+    elsif arg.class == Regexp
+      my_each { |element| return false if arg.match(element) }  
+    elsif self.length.zero? || self.nil?
+      true
+    elsif !block_given? && arg.nil?
+      my_any? { |element| return false if element == true }
+      my_each { |element| return true if element.nil? || element == false }
+    else
+      my_each { |element| return false if element == arg }
+    end
+    true
+  end
   
   def my_count(num = nil)
     chars = 0
