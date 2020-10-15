@@ -27,7 +27,7 @@ module Enumerable
     return to_enum(:my_select) unless block_given?
 
     sel_arr = []
-    my_each { |element| sel_arr.push(element) if yield(element) }
+    my_each { |item| sel_arr.push(item) if yield(item) }
     sel_arr
   end
 
@@ -62,20 +62,20 @@ module Enumerable
 
   def my_none?(*arg)
     if block_given?
-      my_each { |element| return false if yield(element) }
+      my_each { |item| return false if yield(item) }
       true
     elsif arg.is_a?(Class)
-      my_each { |element| return false if element.class == arg }
+      my_each { |item| return false if item.class == arg }
       true
     elsif arg.class == Regexp
-      my_each { |element| return false if arg.match(element) }
+      my_each { |item| return false if arg.match(item) }
     elsif self.length.zero? || self.nil?
       true
     elsif !block_given? && arg.nil?
-      my_any? { |element| return false if element == true }
-      my_each { |element| return true if element.nil? || element == false }
+      my_any? { |item| return false if item == true }
+      my_each { |item| return true if item.nil? || item == false }
     else
-      my_each { |element| return false if element == arg }
+      my_each { |item| return false if item == arg }
     end
     true
   end
