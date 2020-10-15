@@ -50,16 +50,28 @@ module Enumerable
     if block_given?
       my_each { |item| return true if yield(item)}
     elsif arg.nil?
-      my_each { |element| return true if element }
+      my_each { |item| return true if item }
     elsif !arg.nil? and arg.is_a?(Class)
-      my_each { |element| return true if [element.class].include?(arg) }
+      my_each { |item| return true if [item.class].include?(arg) }
     elsif arg.class == Regexp
-      my_each { |element| return true if arg.match(element) }
-    else my_each { |element| return true if element == arg }
+      my_each { |item| return true if arg.match(item) }
+    else my_each { |item| return true if item == arg }
     end
     false
   end
   
+  def my_count(num = nil)
+    chars = 0
+
+    if block_given?
+      my_each { |item| chars += 1 if yield(item)}
+    elsif num
+      my_each { |item| counter += 1 if item == num}
+    else 
+      my_each { chars += 1 }
+    end
+    chars
+  end
 end
 
 # rubocop:enable Style/CaseEquality
