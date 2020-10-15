@@ -36,12 +36,12 @@ module Enumerable
       my_each { |item| return false if yield(item) == false}
       true
     elsif arg.nil?
-      my_each { |element| return false if element.nil? }
+      my_each { |item| return false if item.nil? }
     elsif !arg.nil? and arg.is_a?(Class)
-      my_each { |element| return false unless [element.class].include?(arg) }
+      my_each { |item| return false unless [item.class].include?(arg) }
     elsif arg.class == Regexp
-      my_each { |element| return false unless arg.match(element) }
-    else my_each { |element| return false if element != arg }
+      my_each { |item| return false unless arg.match(item) }
+    else my_each { |item| return false if item != arg }
     end
     true
   end
@@ -68,7 +68,7 @@ module Enumerable
       my_each { |element| return false if element.class == arg }
       true
     elsif arg.class == Regexp
-      my_each { |element| return false if arg.match(element) }  
+      my_each { |element| return false if arg.match(element) }
     elsif self.length.zero? || self.nil?
       true
     elsif !block_given? && arg.nil?
@@ -79,7 +79,7 @@ module Enumerable
     end
     true
   end
-  
+
   def my_count(num = nil)
     chars = 0
 
@@ -92,6 +92,20 @@ module Enumerable
     end
     chars
   end
+
+  def my_map(arg = nil)
+    return enum_for(:my_map) unless block_given? || arg
+
+    new_arr = []
+    if arg
+      my_each { |item| new_arr.push(new_arg.call(item)) }
+    else
+      my_each { |item| new_arr.push(yield(item)) }
+    end
+    new_arr
+  end
+
+
 end
 
 # rubocop:enable Style/CaseEquality
