@@ -5,10 +5,9 @@ module Enumerable
     return to_enum(:my_each) unless block_given?
 
     list = to_a if self.class == Range || Hash
-    i = 0
-    while i < list.length
+
+    for i in 0..list.length
       yield(list[i])
-      i += 1
     end
     self
   end
@@ -25,7 +24,13 @@ module Enumerable
     self
   end
 
+  def my_select
+    return to_enum(:my_select) unless block_given?
 
+    sel_arr = []
+    my_each { |element| sel_arr.push(element) if yield(element) }
+    sel_arr
+  end
 
 end
 
