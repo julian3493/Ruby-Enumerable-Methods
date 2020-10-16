@@ -43,9 +43,9 @@ module Enumerable
       my_each { |item| return false if yield(item) == false }
       true
     elsif arg.nil?
-      my_each { |item| return false if item.nil? }
+      my_each { |item| return false if item.nil? || item == false }
     elsif !arg.nil? and arg.is_a?(Class)
-      my_each { |item| return false unless [item.class.superclass].include?(arg) }
+      my_each { |item| return false unless [item.class, item.class.superclass].include?(arg) }
     elsif arg.class == Regexp
       my_each { |item| return false unless arg.match(item) }
     else my_each { |item| return false if item != arg }
