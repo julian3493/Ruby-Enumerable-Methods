@@ -1,12 +1,19 @@
 # rubocop:disable Style/CaseEquality
+# rubocop:disable Metrics/ModuleLength
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Style/RedundantSelf
 
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
+
     list = to_a if self.class == Range || Hash
 
-    for i in 0..list.length
+    i = 0
+    while i < element.length
       yield(list[i])
+      i += 1
     end
     self
   end
@@ -15,8 +22,11 @@ module Enumerable
     return to_enum(:my_each_with_index) unless block_given?
 
     list = to_a if self.class == Range || Hash
-    for i in 0..list.length
+
+    i = 0
+    while i < element.length
       yield(list[i], i)
+      i += 1
     end
     self
   end
@@ -29,7 +39,7 @@ module Enumerable
     sel_arr
   end
 
-  def my_all? (arg = nil)
+  def my_all?(arg = nil)
     if block_given?
       my_each { |item| return false if yield(item) == false }
       true
@@ -84,7 +94,7 @@ module Enumerable
     if block_given?
       my_each { |item| chars += 1 if yield(item) }
     elsif num
-      my_each { |item| counter += 1 if item == num}
+      my_each { |item| chars += 1 if item == num }
     else
       my_each { chars += 1 }
     end
@@ -121,4 +131,10 @@ end
 def multiply_els(list)
   list.my_inject(:*)
 end
+
+
 # rubocop:enable Style/CaseEquality
+# rubocop:enable Metrics/ModuleLength
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Style/RedundantSelf
