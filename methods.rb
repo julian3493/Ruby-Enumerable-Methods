@@ -1,4 +1,3 @@
-# rubocop:disable Style/CaseEquality
 # rubocop:disable Metrics/ModuleLength
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
@@ -30,6 +29,7 @@ module Enumerable
     end
     self
   end
+  
 
   def my_select
     return to_enum(:my_select) unless block_given?
@@ -132,7 +132,6 @@ def multiply_els(list)
   list.my_inject(:*)
 end
 
-# rubocop:enable Style/CaseEquality
 # rubocop:enable Metrics/ModuleLength
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
