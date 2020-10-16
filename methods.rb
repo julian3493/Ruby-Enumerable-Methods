@@ -5,8 +5,7 @@
 
 module Enumerable
   def my_each
-    return to_enum(:my_each) unless block_given?
-    
+    return to_enum(:my_each) unless block_given?    
     list = to_a if self.class == Range || Hash
 
     i = 0
