@@ -131,6 +131,7 @@ def multiply_els(list)
   list.my_inject(:*)
 end
 
+
 =begin
 #my_each test
 [1, 2, 3, 5].my_each { |x| p x }
@@ -285,17 +286,17 @@ p [1,2,3,4,4,7,7,7,9].my_inject(0){|running_total, item| running_total + item }
 puts
 p [1,2,3,4,4,7,7,7,9].inject(0){|running_total, item| running_total + item }
 puts
-p (5..10).my_inject(:+)                             
+p (5..10).my_inject(:+)
 puts
-p (5..10).inject(:+)                             
+p (5..10).inject(:+)
 puts
 p (5..10).my_inject { |sum, n| sum + n }
 puts
 p (5..10).inject { |sum, n| sum + n }
 puts
-p (5..10).my_inject(1, :*)                       
+p (5..10).my_inject(1, :*)
 puts
-p (5..10).inject(1, :*)                       
+p (5..10).inject(1, :*)
 puts
 p (5..10).my_inject(1) { |product, n| product * n }
 puts
