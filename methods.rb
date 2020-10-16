@@ -84,7 +84,6 @@ module Enumerable
     else
       my_each { |item| return false if item == arg }
     end
-    print "this case"
     true
   end
 
