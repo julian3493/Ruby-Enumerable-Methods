@@ -105,7 +105,7 @@ module Enumerable
 
     new_arr = []
     if arg
-      my_each { |item| new_arr.push(new_arg.call(item)) }
+      my_each { |item| new_arr.push(new_arr.call(item)) }
     else
       my_each { |item| new_arr.push(yield(item)) }
     end
