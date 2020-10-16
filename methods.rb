@@ -29,7 +29,6 @@ module Enumerable
     end
     self
   end
-  
 
   def my_select
     return to_enum(:my_select) unless block_given?
