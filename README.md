@@ -57,3 +57,6 @@ In this project we have created this enumerable methods:
 Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page](https://github.com/julian3493/Ruby-Enumerable-Methods/issues).
+
+## Acknowledgements
+- Rory Hellier: We use his [testing script](https://pastebin.com/WUNBjshC) to test our enumerable methods
