@@ -132,7 +132,6 @@ def multiply_els(list)
   list.my_inject(:*)
 end
 
-
 # rubocop:enable Style/CaseEquality
 # rubocop:enable Metrics/ModuleLength
 # rubocop:enable Metrics/CyclomaticComplexity
