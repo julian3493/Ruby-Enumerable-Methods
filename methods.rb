@@ -3,7 +3,6 @@
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
-
     list = to_a if self.class == Range || Hash
 
     for i in 0..list.length
@@ -16,7 +15,6 @@ module Enumerable
     return to_enum(:my_each_with_index) unless block_given?
 
     list = to_a if self.class == Range || Hash
-    
     for i in 0..list.length
       yield(list[i], i)
     end
@@ -31,9 +29,9 @@ module Enumerable
     sel_arr
   end
 
-  def my_all?(*arg)
+  def my_all? (arg = nil)
     if block_given?
-      my_each { |item| return false if yield(item) == false}
+      my_each { |item| return false if yield(item) == false }
       true
     elsif arg.nil?
       my_each { |item| return false if item.nil? }
@@ -48,7 +46,7 @@ module Enumerable
 
   def my_any?(*arg)
     if block_given?
-      my_each { |item| return true if yield(item)}
+      my_each { |item| return true if yield(item) }
     elsif arg.nil?
       my_each { |item| return true if item }
     elsif !arg.nil? and arg.is_a?(Class)
@@ -84,10 +82,10 @@ module Enumerable
     chars = 0
 
     if block_given?
-      my_each { |item| chars += 1 if yield(item)}
+      my_each { |item| chars += 1 if yield(item) }
     elsif num
       my_each { |item| counter += 1 if item == num}
-    else 
+    else
       my_each { chars += 1 }
     end
     chars
