@@ -6,7 +6,7 @@
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
-
+    
     list = to_a if self.class == Range || Hash
 
     i = 0
@@ -76,11 +76,11 @@ module Enumerable
       true
     elsif arg.class == Regexp
       my_each { |item| return false if arg.match(item) }
-    elsif self.length.zero? || self.nil?
-      true
     elsif !block_given? && arg.nil?
       my_any? { |item| return false if item == true }
-      my_each { |item| return true if item.nil? || item == false }
+      my_each { |item| return false unless item.nil? || item == false }
+    elsif self.length.zero? || self.nil?
+      true
     else
       my_each { |item| return false if item == arg }
     end
